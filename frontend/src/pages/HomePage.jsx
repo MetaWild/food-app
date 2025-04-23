@@ -2,16 +2,30 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
 import { signOut } from 'firebase/auth';
+import axios from 'axios';
 
 export default function HomePage() {
-  const [meals, setMeals] = useState([
-    'Avocado Toast',
-    'Chicken Salad',
-    'Protein Shake',
-    'Grilled Salmon & Rice',
-    'Oatmeal with Berries',
-    'Veggie Stir Fry',
-  ]);
+    const [meals, setMeals] = useState([]);
+
+    useEffect(() => {
+        const fetchMeals = async () => {
+          const user = auth.currentUser;
+          if (!user) return;
+          const idToken = await user.getIdToken();
+          const today = new Date().toLocaleDateString('en-CA');
+          
+          const res = await axios.get(`http://localhost:8000/meals`, {
+            params: { userId: user.uid, date: today },
+            headers: { Authorization: `Bearer ${idToken}` },
+            withCredentials: false,
+          });
+          
+            console.log("Fetched meals:", res.data); // 🔍 Add this
+          setMeals(res.data);
+        };
+      
+        fetchMeals();
+      }, []);
 
   const navigate = useNavigate();
 
@@ -25,11 +39,11 @@ export default function HomePage() {
   };
 
   const handleDailyTracker = () => {
-    alert('Daily Tracker page (to be implemented)');
+    navigate('/tracker');
   };
 
   const handleMealClick = (meal) => {
-    alert(`You clicked on ${meal}`);
+    navigate(`/meal/${encodeURIComponent(meal.title)}`, { state: { meal } });
   };
 
   return (
@@ -48,18 +62,20 @@ export default function HomePage() {
 
         {/* Meal List */}
         <div style={styles.mealList}>
-          {meals.map((meal, index) => (
+        {meals.map((meal, index) => (
+            meal.title && meal.nutrition ? (
             <button
-              key={index}
-              style={styles.mealButton}
-              onClick={() => handleMealClick(meal)}
+                key={index}
+                style={styles.mealButton}
+                onClick={() => handleMealClick(meal)}
             >
-              {meal}
-            </button>
-          ))}
+      {meal.title}
+    </button>
+  ) : null  // skip invalid or error objects
+))}
         </div>
         {/* Camera Button */}
-        <button onClick={() => alert('Open camera...')} style={styles.cameraButton}>
+        <button onClick={() => navigate('/capture')} style={styles.cameraButton}>
         📷
         </button>
       </div>

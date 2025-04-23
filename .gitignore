@@ -16,5 +16,10 @@ __pycache__/
 /frontend/.vite/
 /frontend/dist/
 
+# Backend
+/backend/food-app-536ba-firebase-adminsdk-fbsvc-cefe3ccc94.json
+/backend/*.json
+/backend/.env
+
 # OS
 .DS_Store
