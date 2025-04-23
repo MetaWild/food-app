@@ -7,7 +7,6 @@ firebase_json = os.getenv("FIREBASE_CONFIG_JSON")
 if not firebase_json:
     raise RuntimeError("FIREBASE_CONFIG_JSON not set")
 
-# Parse string to dict
 cred_dict = json.loads(firebase_json)
 cred = credentials.Certificate(cred_dict)
 firebase_admin.initialize_app(cred)

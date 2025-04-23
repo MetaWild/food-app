@@ -8,7 +8,7 @@ import MealDetailPage from './pages/MealDetailPage';
 export default function App() {
   const { user, loading } = useAuth();
 
-  if (loading) return <div>Loading...</div>; // 🔄 wait before rendering anything
+  if (loading) return <div>Loading...</div>;
 
   return (
     <Router>

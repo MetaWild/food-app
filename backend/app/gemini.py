@@ -42,7 +42,6 @@ def analyze_image(base64_image):
 
         result_text = response.text.strip()
 
-        # 🧠 Extract the first full JSON object in the response
         json_match = re.search(r"\{.*\}", result_text, re.DOTALL)
         if not json_match:
             raise ValueError("No JSON object found in Gemini response.")

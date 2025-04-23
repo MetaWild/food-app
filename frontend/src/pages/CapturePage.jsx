@@ -9,20 +9,26 @@ export default function CapturePage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // ✅ Start the camera
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user' }
+        video: { facingMode: { ideal: 'environment' } }
       });
       videoRef.current.srcObject = stream;
-    } catch (err) {
-      alert("Camera access denied or not supported.");
-      console.error(err);
+    } catch (err1) {
+      console.warn("Rear camera not available, trying fallback...", err1);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true
+        });
+        videoRef.current.srcObject = stream;
+      } catch (err2) {
+        alert("Camera access denied or not supported.");
+        console.error("Failed to access any camera:", err2);
+      }
     }
   };
 
-  // ✅ Start camera when component mounts
   useEffect(() => {
     startCamera();
     return () => {
@@ -45,17 +51,14 @@ export default function CapturePage() {
     try {
       setLoading(true);
   
-      // 1. Send image to Gemini backend
       const analyzeRes = await axios.post('https://food-app-zpft.onrender.com/analyze-image', {
         image: imageData,
       });
       const mealData = analyzeRes.data;
   
-      // 2. Get Firebase user ID + token
       const user = auth.currentUser;
       const idToken = await user.getIdToken();
   
-      // 3. Send to /save-meal
       await axios.post(
         'https://food-app-zpft.onrender.com/save-meal',
         {
@@ -67,7 +70,6 @@ export default function CapturePage() {
         }
       );
   
-      // 4. Go back to home
       navigate('/');
     } catch (err) {
       console.error(err);

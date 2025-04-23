@@ -20,7 +20,7 @@ export default function HomePage() {
             withCredentials: false,
           });
           
-            console.log("Fetched meals:", res.data); // 🔍 Add this
+            console.log("Fetched meals:", res.data);
           setMeals(res.data);
         };
       
@@ -49,7 +49,6 @@ export default function HomePage() {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        {/* Top Bar */}
         <div style={styles.topBar}>
           <button onClick={handleLogout} style={styles.linkButton}>
             Logout
@@ -60,7 +59,6 @@ export default function HomePage() {
           </button>
         </div>
 
-        {/* Meal List */}
         <div style={styles.mealList}>
         {meals.map((meal, index) => (
             meal.title && meal.nutrition ? (
@@ -71,10 +69,9 @@ export default function HomePage() {
             >
       {meal.title}
     </button>
-  ) : null  // skip invalid or error objects
+  ) : null 
 ))}
         </div>
-        {/* Camera Button */}
         <button onClick={() => navigate('/capture')} style={styles.cameraButton}>
         📷
         </button>

@@ -6,7 +6,6 @@ export default function MealDetailPage() {
   const { state } = useLocation();
   const meal = state?.meal;
 
-  // fallback if no data was passed
   if (!meal) {
     return (
       <div style={styles.page}>
