@@ -46,7 +46,7 @@ export default function CapturePage() {
       setLoading(true);
   
       // 1. Send image to Gemini backend
-      const analyzeRes = await axios.post('http://localhost:8000/analyze-image', {
+      const analyzeRes = await axios.post('https://food-app-zpft.onrender.com/analyze-image', {
         image: imageData,
       });
       const mealData = analyzeRes.data;
@@ -57,7 +57,7 @@ export default function CapturePage() {
   
       // 3. Send to /save-meal
       await axios.post(
-        'http://localhost:8000/save-meal',
+        'https://food-app-zpft.onrender.com/save-meal',
         {
           userId: user.uid,
           meal: mealData,

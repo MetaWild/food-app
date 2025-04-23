@@ -14,7 +14,7 @@ export default function HomePage() {
           const idToken = await user.getIdToken();
           const today = new Date().toLocaleDateString('en-CA');
           
-          const res = await axios.get(`http://localhost:8000/meals`, {
+          const res = await axios.get(`https://food-app-zpft.onrender.com/meals`, {
             params: { userId: user.uid, date: today },
             headers: { Authorization: `Bearer ${idToken}` },
             withCredentials: false,
