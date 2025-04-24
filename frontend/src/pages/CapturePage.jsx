@@ -59,16 +59,11 @@ export default function CapturePage() {
       const user = auth.currentUser;
       const idToken = await user.getIdToken();
   
-      await axios.post(
-        'https://food-app-zpft.onrender.com/save-meal',
-        {
-          userId: user.uid,
-          meal: mealData,
-        },
-        {
-          headers: { Authorization: `Bearer ${idToken}` },
-        }
-      );
+      const today = new Date().toLocaleDateString('en-CA');
+        await axios.post(`${BASE_URL}/save-meal`, {
+        ...mealData,
+        date: today
+        }, { headers: { Authorization: `Bearer ${idToken}` } });
   
       navigate('/');
     } catch (err) {

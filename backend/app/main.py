@@ -31,9 +31,8 @@ def analyze(request: AnalyzeRequest):
 
 @app.post("/save-meal")
 def save_meal_api(req: SaveMealRequest):
-    # Add timestamp and human-readable date
     req.meal["timestamp"] = time.time()
-    req.meal["date"] = datetime.now().strftime("%Y-%m-%d")
+    req.meal["date"] = req.meal.get("date") or datetime.now().strftime("%Y-%m-%d")
 
     save_meal(req.userId, req.meal)
     return {"status": "saved"}
