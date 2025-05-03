@@ -12,7 +12,7 @@ if not firebase_json:
 cred_dict = json.loads(firebase_json)
 cred = credentials.Certificate(cred_dict)
 firebase_admin.initialize_app(cred, {
-    'storageBucket': cred_dict.get("project_id") + ".appspot.com"
+    'storageBucket': "food-app-536ba.firebasestorage.app"
 })
 
 db = firestore.client()
