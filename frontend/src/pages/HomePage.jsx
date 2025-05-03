@@ -62,13 +62,18 @@ export default function HomePage() {
         <div style={styles.mealList}>
         {meals.map((meal, index) => (
             meal.title && meal.nutrition ? (
-            <button
-                key={index}
-                style={styles.mealButton}
-                onClick={() => handleMealClick(meal)}
+              <button
+              key={index}
+              style={styles.mealButton}
+              onClick={() => handleMealClick(meal)}
             >
-      {meal.title}
-    </button>
+              <div style={styles.mealEntry}>
+                {meal.imageUrl && (
+                  <img src={meal.imageUrl} alt="Meal" style={styles.mealImage} />
+                )}
+                <span style={styles.mealTitle}>{meal.title}</span>
+              </div>
+            </button>
   ) : null 
 ))}
         </div>

@@ -24,6 +24,14 @@ export default function MealDetailPage() {
           <button onClick={() => navigate('/')} style={styles.backButton}>← Back</button>
           <h2 style={styles.title}>{meal.title}</h2>
         </div>
+        
+        {meal.imageUrl && (
+          <img
+            src={meal.imageUrl}
+            alt="Meal"
+            style={styles.mealImage}
+          />
+        )}
 
         <div style={styles.ingredientList}>
           {meal.nutrition.map((item, index) => (
@@ -110,5 +118,12 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     fontSize: '14px',
+  },
+  mealImage: {
+    width: '100%',
+    height: 'auto',
+    borderRadius: '8px',
+    objectFit: 'cover',
+    marginBottom: '12px',
   },
 };
