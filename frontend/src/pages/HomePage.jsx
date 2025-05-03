@@ -154,6 +154,11 @@ const styles = {
     borderRadius: 6,
     objectFit: 'cover',
   },
+  mealEntry: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+  },
   cameraButton: {
     position: 'absolute',
     bottom: '20px',

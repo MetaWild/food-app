@@ -24,7 +24,7 @@ export default function MealDetailPage() {
           <button onClick={() => navigate('/')} style={styles.backButton}>← Back</button>
           <h2 style={styles.title}>{meal.title}</h2>
         </div>
-        
+
         {meal.imageUrl && (
           <img
             src={meal.imageUrl}
@@ -120,10 +120,10 @@ const styles = {
     fontSize: '14px',
   },
   mealImage: {
-    width: '100%',
-    height: 'auto',
-    borderRadius: '8px',
-    objectFit: 'cover',
-    marginBottom: '12px',
+  width: '100%',
+  maxHeight: '180px',
+  objectFit: 'cover',
+  borderRadius: '8px',
+  marginBottom: '12px',
   },
 };
