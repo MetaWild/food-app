@@ -64,8 +64,11 @@ export default function CapturePage() {
       await axios.post(
         'https://food-app-zpft.onrender.com/save-meal',
         {
-            userId: user.uid,
-            meal: mealData,
+          userId: user.uid,
+          meal: {
+            ...mealData,
+            image: imageData,
+          },
         },
         {
           headers: { Authorization: `Bearer ${idToken}` },
