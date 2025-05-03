@@ -148,6 +148,12 @@ const styles = {
     textAlign: 'left',
     cursor: 'pointer',
   },
+  mealImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 6,
+    objectFit: 'cover',
+  },
   cameraButton: {
     position: 'absolute',
     bottom: '20px',
