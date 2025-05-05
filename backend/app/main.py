@@ -45,3 +45,7 @@ def save_meal_api(req: SaveMealRequest):
 @app.get("/meals")
 def get_meal_data(userId: str, date: str = None):
     return get_meals(userId, date)
+
+@app.get("/meals/alltime")
+def get_alltime_meal_data(userId: str):
+    return get_meals(userId)
